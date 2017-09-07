@@ -179,6 +179,12 @@
                 <scope>test</scope>
                 <version>${testng}</version>
             </dependency>
+            <!--httpunit-->
+            <dependency>
+                <groupId>org.httpunit</groupId>
+                <artifactId>httpunit</artifactId>
+                <version>1.7.2</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

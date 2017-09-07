@@ -35,9 +35,12 @@ public class Command {
     }  
   
     public static void main(String[] args) {
-        System.out.println("开始");
-        String commandStr = "ping www.baidu.com";
-        //String commandStr = "ipconfig";  
-        Command.exeCmd(commandStr);
+//        System.out.println("开始");
+//        String commandStr = "ping www.baidu.com";
+//        //String commandStr = "ipconfig";
+//        Command.exeCmd(commandStr);
+        String branchName = "车享家汽车养护中心(绵阳滨河南路店)";
+        branchName = branchName.substring(branchName.indexOf("(")+1,branchName.indexOf(")"));
+        System.out.println(branchName);
     }
 }
