@@ -20,7 +20,7 @@ public class OrderServiceImpl implements IOrderService {
         OrderVO orderVO = new OrderVO();
         orderVO.setOrderCode("12345678");
         orderVO.setCreateBy(memberId);
-        List<OrderVO> result = new ArrayList<>();
+        List<OrderVO> result = new ArrayList<OrderVO>();
         result.add(orderVO);
         return result;
     }

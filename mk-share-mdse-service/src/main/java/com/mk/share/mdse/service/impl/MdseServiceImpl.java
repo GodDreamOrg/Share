@@ -18,7 +18,7 @@ public class MdseServiceImpl implements IMdseService{
 
     @Override
     public List<MdseVo> queryAllMdseVO() {
-        List<MdseVo> mdseVoList = new ArrayList<>();
+        List<MdseVo> mdseVoList = new ArrayList<MdseVo>();
         MdseVo mdseVo = new MdseVo();
         mdseVo.setMdseCode("123");
         mdseVo.setMdseName("高达");

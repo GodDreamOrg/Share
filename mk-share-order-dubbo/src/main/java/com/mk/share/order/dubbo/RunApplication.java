@@ -11,7 +11,7 @@ import com.alibaba.dubbo.container.Main;
  */
 public class RunApplication {
     public static void main(String[] args) {
-        System.out.println("服务器准备启动");
+        System.out.println("订单服务器准备启动....太上老君急急如律令保佑不出bug...");
         // 服务器启动
         Main.main(args);
     }
