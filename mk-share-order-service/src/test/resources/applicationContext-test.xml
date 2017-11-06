@@ -9,7 +9,7 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.mk.share.order" />
     <!-- 加载application.properties-->
-    <context:property-placeholder location="classpath:application.properties"></context:property-placeholder>
+    <context:property-placeholder location="classpath:*.properties"></context:property-placeholder>
     <!-- 导入 dubbo 注册相关配置-->
     <import resource="classpath:dubbo/dubbo-registry.xml"></import>
     <!-- 导入 bean 配置-->

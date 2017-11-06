@@ -5,5 +5,4 @@
        xsi:schemaLocation="http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
-    <dubbo:reference interface="com.mk.share.mdse.api.service.IMdseService" id="mdseService"/>
 </beans>

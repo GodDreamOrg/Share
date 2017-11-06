@@ -1,9 +1,11 @@
 package com.mk.share.order.service.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Order {
+public class Order implements Serializable{
+    private static final long serialVersionUID = -4403305895763142697L;
     private Long id;
 
     private Long memberId;
