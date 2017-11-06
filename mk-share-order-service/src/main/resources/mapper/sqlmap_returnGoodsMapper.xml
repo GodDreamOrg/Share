@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mk.share.order.service.dao.ReturnGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.ReturnGoods" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="RETURN_GOODS_CODE" property="returnGoodsCode" jdbcType="VARCHAR" />
+    <result column="ORDER_CODE" property="orderCode" jdbcType="VARCHAR" />
+    <result column="RETURN_REASON" property="returnReason" jdbcType="VARCHAR" />
+    <result column="ORDER_BUSINESS_TYPE" property="orderBusinessType" jdbcType="VARCHAR" />
+    <result column="CHANNEL_TYPE" property="channelType" jdbcType="VARCHAR" />
+    <result column="MEMBER_ID" property="memberId" jdbcType="BIGINT" />
+    <result column="MEMBER_NAME" property="memberName" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_CODE" property="supplierCode" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_NAME" property="supplierName" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, RETURN_GOODS_CODE, ORDER_CODE, RETURN_REASON, ORDER_BUSINESS_TYPE, CHANNEL_TYPE, 
+    MEMBER_ID, MEMBER_NAME, SUPPLIER_CODE, SUPPLIER_NAME, CREATE_DATE, REMARK, MOBILE, 
+    CREATE_BY, UPDATE_TIME, UPDATE_BY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ssc_return_goods
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_ssc_return_goods
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mk.share.order.service.entity.ReturnGoods" >
+    insert into t_ssc_return_goods (ID, RETURN_GOODS_CODE, ORDER_CODE, 
+      RETURN_REASON, ORDER_BUSINESS_TYPE, CHANNEL_TYPE, 
+      MEMBER_ID, MEMBER_NAME, SUPPLIER_CODE, 
+      SUPPLIER_NAME, CREATE_DATE, REMARK, 
+      MOBILE, CREATE_BY, UPDATE_TIME, 
+      UPDATE_BY)
+    values (#{id,jdbcType=BIGINT}, #{returnGoodsCode,jdbcType=VARCHAR}, #{orderCode,jdbcType=VARCHAR}, 
+      #{returnReason,jdbcType=VARCHAR}, #{orderBusinessType,jdbcType=VARCHAR}, #{channelType,jdbcType=VARCHAR}, 
+      #{memberId,jdbcType=BIGINT}, #{memberName,jdbcType=VARCHAR}, #{supplierCode,jdbcType=VARCHAR}, 
+      #{supplierName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.ReturnGoods" >
+    insert into t_ssc_return_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="returnGoodsCode != null" >
+        RETURN_GOODS_CODE,
+      </if>
+      <if test="orderCode != null" >
+        ORDER_CODE,
+      </if>
+      <if test="returnReason != null" >
+        RETURN_REASON,
+      </if>
+      <if test="orderBusinessType != null" >
+        ORDER_BUSINESS_TYPE,
+      </if>
+      <if test="channelType != null" >
+        CHANNEL_TYPE,
+      </if>
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="memberName != null" >
+        MEMBER_NAME,
+      </if>
+      <if test="supplierCode != null" >
+        SUPPLIER_CODE,
+      </if>
+      <if test="supplierName != null" >
+        SUPPLIER_NAME,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="returnGoodsCode != null" >
+        #{returnGoodsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null" >
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnReason != null" >
+        #{returnReason,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBusinessType != null" >
+        #{orderBusinessType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelType != null" >
+        #{channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierCode != null" >
+        #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null" >
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.ReturnGoods" >
+    update t_ssc_return_goods
+    <set >
+      <if test="returnGoodsCode != null" >
+        RETURN_GOODS_CODE = #{returnGoodsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null" >
+        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnReason != null" >
+        RETURN_REASON = #{returnReason,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBusinessType != null" >
+        ORDER_BUSINESS_TYPE = #{orderBusinessType,jdbcType=VARCHAR},
+      </if>
+      <if test="channelType != null" >
+        CHANNEL_TYPE = #{channelType,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        MEMBER_ID = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="memberName != null" >
+        MEMBER_NAME = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierCode != null" >
+        SUPPLIER_CODE = #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null" >
+        SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY = #{updateBy,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.ReturnGoods" >
+    update t_ssc_return_goods
+    set RETURN_GOODS_CODE = #{returnGoodsCode,jdbcType=VARCHAR},
+      ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      RETURN_REASON = #{returnReason,jdbcType=VARCHAR},
+      ORDER_BUSINESS_TYPE = #{orderBusinessType,jdbcType=VARCHAR},
+      CHANNEL_TYPE = #{channelType,jdbcType=VARCHAR},
+      MEMBER_ID = #{memberId,jdbcType=BIGINT},
+      MEMBER_NAME = #{memberName,jdbcType=VARCHAR},
+      SUPPLIER_CODE = #{supplierCode,jdbcType=VARCHAR},
+      SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
