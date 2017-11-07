@@ -1,5 +1,6 @@
 package com.mk.share.order.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.mk.share.mdse.api.service.IMdseService;
 import com.mk.share.mdse.api.vo.MdseVo;
 import com.mk.share.order.api.service.IOrderService;
@@ -30,17 +31,9 @@ public class OrderServiceTest extends BaseTestConfig{
     @Test
     public void orderServiceTest(){
         logger.info("测试服务开始");
-        List<OrderVO> orderVOList = orderService.queryOrderByMemberId(123L);
-        if (orderVOList != null ){
-            for (OrderVO orderVO : orderVOList) {
-                System.out.println(orderVO.getCreateBy()+":"+orderVO.getOrderCode());
-            }
-        }
-        logger.info("测试mdseService服务开始");
-        List<MdseVo> mdseVoList = mdseService.queryAllMdseVO();
-        if (mdseVoList == null || mdseVoList.size() == 0) logger.info("mdseVoList is null Ok?man");
-        for (MdseVo mdseVo : mdseVoList) {
-            System.out.println(mdseVo.getMdseCode()+":"+mdseVo.getMdseName());
+        OrderVO orderVO = orderService.selectByPrimaryKey(1L);
+        if (orderVO != null ){
+            System.out.println(JSON.toJSONString(orderVO));
         }
         logger.info("测试服务结束");
     }

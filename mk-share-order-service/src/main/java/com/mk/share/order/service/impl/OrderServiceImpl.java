@@ -2,6 +2,10 @@ package com.mk.share.order.service.impl;
 
 import com.mk.share.order.api.service.IOrderService;
 import com.mk.share.order.api.vo.OrderVO;
+import com.mk.share.order.service.dao.OrderMapper;
+import com.mk.share.order.service.entity.Order;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,13 +19,14 @@ import java.util.List;
  */
 @Service("orderService")
 public class OrderServiceImpl implements IOrderService {
+    @Autowired
+    private OrderMapper orderMapper;
+
     @Override
-    public List<OrderVO> queryOrderByMemberId(Long memberId) {
-        OrderVO orderVO = new OrderVO();
-        orderVO.setOrderCode("12345678");
-        orderVO.setCreateBy(memberId);
-        List<OrderVO> result = new ArrayList<OrderVO>();
-        result.add(orderVO);
+    public OrderVO selectByPrimaryKey(Long id) {
+        OrderVO result = new OrderVO();
+        Order order = orderMapper.selectByPrimaryKey(id);
+        BeanUtils.copyProperties(order, result);
         return result;
     }
 }

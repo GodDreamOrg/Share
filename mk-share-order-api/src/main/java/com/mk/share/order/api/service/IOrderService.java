@@ -2,8 +2,6 @@ package com.mk.share.order.api.service;
 
 import com.mk.share.order.api.vo.OrderVO;
 
-import java.util.List;
-
 /**
  * 订单接口
  *
@@ -12,5 +10,5 @@ import java.util.List;
  */
 public interface IOrderService {
 
-    List<OrderVO> queryOrderByMemberId(Long memberId);
+    OrderVO selectByPrimaryKey(Long id);
 }
