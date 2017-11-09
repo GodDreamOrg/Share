@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * hello
@@ -19,9 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @create 2017-09-10 13:35
  */
 @Controller
+@RequestMapping("/wocao")
 public class HelloController {
 
-    @RequestMapping("/hello/index.htm")
+    @RequestMapping("/index")
     public String hello(){
         return "hello";
     }
@@ -60,6 +62,12 @@ public class HelloController {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    @RequestMapping(value="yoxi.do",method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView dev() {
+        return new ModelAndView("yoxi");
     }
 
     public static void main(String[] args) throws Exception {
