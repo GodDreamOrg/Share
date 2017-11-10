@@ -55,7 +55,7 @@ public class BuySKUVO implements Serializable{
     /**
      * 积分单价
      */
-    private BigDecimal pointPrice;
+    private Integer pointPrice;
     /**
      * 购买数量
      */
@@ -141,11 +141,11 @@ public class BuySKUVO implements Serializable{
         this.realPrice = realPrice;
     }
 
-    public BigDecimal getPointPrice() {
+    public Integer getPointPrice() {
         return pointPrice;
     }
 
-    public void setPointPrice(BigDecimal pointPrice) {
+    public void setPointPrice(Integer pointPrice) {
         this.pointPrice = pointPrice;
     }
 

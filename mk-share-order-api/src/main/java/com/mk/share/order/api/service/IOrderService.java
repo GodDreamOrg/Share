@@ -1,6 +1,7 @@
 package com.mk.share.order.api.service;
 
 import com.mk.share.order.api.vo.OrderVO;
+import com.mk.share.order.api.vo.SplitOrderVO;
 
 /**
  * 订单接口
@@ -11,4 +12,6 @@ import com.mk.share.order.api.vo.OrderVO;
 public interface IOrderService {
 
     OrderVO selectByPrimaryKey(Long id);
+
+    boolean splitOrder(SplitOrderVO splitOrderVO);
 }
