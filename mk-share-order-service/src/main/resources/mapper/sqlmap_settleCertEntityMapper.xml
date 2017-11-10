@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mk.share.order.service.dao.SettleCertEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.SettleCertEntity" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="BATCH_ID" property="batchId" jdbcType="VARCHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
+    <result column="RELATE_ORDER_ID" property="relateOrderId" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="ORDER_ITEM_ID" property="orderItemId" jdbcType="VARCHAR" />
+    <result column="MDSE_NAME" property="mdseName" jdbcType="VARCHAR" />
+    <result column="SETTLOR_NAME" property="settlorName" jdbcType="VARCHAR" />
+    <result column="SETTLOR_TYPE" property="settlorType" jdbcType="INTEGER" />
+    <result column="SETTLE_PRICE" property="settlePrice" jdbcType="DECIMAL" />
+    <result column="CASH_PRICE" property="cashPrice" jdbcType="DECIMAL" />
+    <result column="POINT_PRICE" property="pointPrice" jdbcType="DECIMAL" />
+    <result column="ORDER_STATUS" property="orderStatus" jdbcType="INTEGER" />
+    <result column="MEMBER_NAME" property="memberName" jdbcType="VARCHAR" />
+    <result column="MEMBER_ID" property="memberId" jdbcType="BIGINT" />
+    <result column="CUST_EMAIL" property="custEmail" jdbcType="VARCHAR" />
+    <result column="MOBILE_NO" property="mobileNo" jdbcType="VARCHAR" />
+    <result column="SETTLE_TIME" property="settleTime" jdbcType="TIMESTAMP" />
+    <result column="ORDER_TYPE" property="orderType" jdbcType="INTEGER" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="ORDER_VERSION" property="orderVersion" jdbcType="INTEGER" />
+    <result column="SETTLOR_ID" property="settlorId" jdbcType="VARCHAR" />
+    <result column="SETTLE_LAUNCH_TIME" property="settleLaunchTime" jdbcType="TIMESTAMP" />
+    <result column="COMMISSION_PRICE" property="commissionPrice" jdbcType="DECIMAL" />
+    <result column="CONTRACT_PRICE" property="contractPrice" jdbcType="DECIMAL" />
+    <result column="MSG" property="msg" jdbcType="VARCHAR" />
+    <result column="PROCESS_TIME" property="processTime" jdbcType="TIMESTAMP" />
+    <result column="PRMT_NAME" property="prmtName" jdbcType="VARCHAR" />
+    <result column="BIZ_TYPE" property="bizType" jdbcType="INTEGER" />
+    <result column="SPU_CODE" property="spuCode" jdbcType="VARCHAR" />
+    <result column="SETTLOR_CODE" property="settlorCode" jdbcType="VARCHAR" />
+    <result column="ORDER_CODE" property="orderCode" jdbcType="VARCHAR" />
+    <result column="SKU_CODE" property="skuCode" jdbcType="VARCHAR" />
+    <result column="QUANTITY" property="quantity" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BATCH_ID, ORDER_ID, RELATE_ORDER_ID, STATUS, ORDER_ITEM_ID, MDSE_NAME, SETTLOR_NAME, 
+    SETTLOR_TYPE, SETTLE_PRICE, CASH_PRICE, POINT_PRICE, ORDER_STATUS, MEMBER_NAME, MEMBER_ID, 
+    CUST_EMAIL, MOBILE_NO, SETTLE_TIME, ORDER_TYPE, CREATE_USER_ID, ORDER_VERSION, SETTLOR_ID, 
+    SETTLE_LAUNCH_TIME, COMMISSION_PRICE, CONTRACT_PRICE, MSG, PROCESS_TIME, PRMT_NAME, 
+    BIZ_TYPE, SPU_CODE, SETTLOR_CODE, ORDER_CODE, SKU_CODE, QUANTITY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ssc_settle_cert
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_ssc_settle_cert
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mk.share.order.service.entity.SettleCertEntity" >
+    insert into t_ssc_settle_cert (ID, BATCH_ID, ORDER_ID, 
+      RELATE_ORDER_ID, STATUS, ORDER_ITEM_ID, 
+      MDSE_NAME, SETTLOR_NAME, SETTLOR_TYPE, 
+      SETTLE_PRICE, CASH_PRICE, POINT_PRICE, 
+      ORDER_STATUS, MEMBER_NAME, MEMBER_ID, 
+      CUST_EMAIL, MOBILE_NO, SETTLE_TIME, 
+      ORDER_TYPE, CREATE_USER_ID, ORDER_VERSION, 
+      SETTLOR_ID, SETTLE_LAUNCH_TIME, COMMISSION_PRICE, 
+      CONTRACT_PRICE, MSG, PROCESS_TIME, 
+      PRMT_NAME, BIZ_TYPE, SPU_CODE, 
+      SETTLOR_CODE, ORDER_CODE, SKU_CODE, 
+      QUANTITY)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{orderId,jdbcType=BIGINT}, 
+      #{relateOrderId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{orderItemId,jdbcType=VARCHAR}, 
+      #{mdseName,jdbcType=VARCHAR}, #{settlorName,jdbcType=VARCHAR}, #{settlorType,jdbcType=INTEGER}, 
+      #{settlePrice,jdbcType=DECIMAL}, #{cashPrice,jdbcType=DECIMAL}, #{pointPrice,jdbcType=DECIMAL}, 
+      #{orderStatus,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{memberId,jdbcType=BIGINT}, 
+      #{custEmail,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR}, #{settleTime,jdbcType=TIMESTAMP}, 
+      #{orderType,jdbcType=INTEGER}, #{createUserId,jdbcType=VARCHAR}, #{orderVersion,jdbcType=INTEGER}, 
+      #{settlorId,jdbcType=VARCHAR}, #{settleLaunchTime,jdbcType=TIMESTAMP}, #{commissionPrice,jdbcType=DECIMAL}, 
+      #{contractPrice,jdbcType=DECIMAL}, #{msg,jdbcType=VARCHAR}, #{processTime,jdbcType=TIMESTAMP}, 
+      #{prmtName,jdbcType=VARCHAR}, #{bizType,jdbcType=INTEGER}, #{spuCode,jdbcType=VARCHAR}, 
+      #{settlorCode,jdbcType=VARCHAR}, #{orderCode,jdbcType=VARCHAR}, #{skuCode,jdbcType=VARCHAR}, 
+      #{quantity,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.SettleCertEntity" >
+    insert into t_ssc_settle_cert
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="batchId != null" >
+        BATCH_ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="relateOrderId != null" >
+        RELATE_ORDER_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="orderItemId != null" >
+        ORDER_ITEM_ID,
+      </if>
+      <if test="mdseName != null" >
+        MDSE_NAME,
+      </if>
+      <if test="settlorName != null" >
+        SETTLOR_NAME,
+      </if>
+      <if test="settlorType != null" >
+        SETTLOR_TYPE,
+      </if>
+      <if test="settlePrice != null" >
+        SETTLE_PRICE,
+      </if>
+      <if test="cashPrice != null" >
+        CASH_PRICE,
+      </if>
+      <if test="pointPrice != null" >
+        POINT_PRICE,
+      </if>
+      <if test="orderStatus != null" >
+        ORDER_STATUS,
+      </if>
+      <if test="memberName != null" >
+        MEMBER_NAME,
+      </if>
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="custEmail != null" >
+        CUST_EMAIL,
+      </if>
+      <if test="mobileNo != null" >
+        MOBILE_NO,
+      </if>
+      <if test="settleTime != null" >
+        SETTLE_TIME,
+      </if>
+      <if test="orderType != null" >
+        ORDER_TYPE,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="orderVersion != null" >
+        ORDER_VERSION,
+      </if>
+      <if test="settlorId != null" >
+        SETTLOR_ID,
+      </if>
+      <if test="settleLaunchTime != null" >
+        SETTLE_LAUNCH_TIME,
+      </if>
+      <if test="commissionPrice != null" >
+        COMMISSION_PRICE,
+      </if>
+      <if test="contractPrice != null" >
+        CONTRACT_PRICE,
+      </if>
+      <if test="msg != null" >
+        MSG,
+      </if>
+      <if test="processTime != null" >
+        PROCESS_TIME,
+      </if>
+      <if test="prmtName != null" >
+        PRMT_NAME,
+      </if>
+      <if test="bizType != null" >
+        BIZ_TYPE,
+      </if>
+      <if test="spuCode != null" >
+        SPU_CODE,
+      </if>
+      <if test="settlorCode != null" >
+        SETTLOR_CODE,
+      </if>
+      <if test="orderCode != null" >
+        ORDER_CODE,
+      </if>
+      <if test="skuCode != null" >
+        SKU_CODE,
+      </if>
+      <if test="quantity != null" >
+        QUANTITY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null" >
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="relateOrderId != null" >
+        #{relateOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="orderItemId != null" >
+        #{orderItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="mdseName != null" >
+        #{mdseName,jdbcType=VARCHAR},
+      </if>
+      <if test="settlorName != null" >
+        #{settlorName,jdbcType=VARCHAR},
+      </if>
+      <if test="settlorType != null" >
+        #{settlorType,jdbcType=INTEGER},
+      </if>
+      <if test="settlePrice != null" >
+        #{settlePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="cashPrice != null" >
+        #{cashPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pointPrice != null" >
+        #{pointPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="custEmail != null" >
+        #{custEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null" >
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="settleTime != null" >
+        #{settleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderVersion != null" >
+        #{orderVersion,jdbcType=INTEGER},
+      </if>
+      <if test="settlorId != null" >
+        #{settlorId,jdbcType=VARCHAR},
+      </if>
+      <if test="settleLaunchTime != null" >
+        #{settleLaunchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commissionPrice != null" >
+        #{commissionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="contractPrice != null" >
+        #{contractPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="processTime != null" >
+        #{processTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prmtName != null" >
+        #{prmtName,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        #{bizType,jdbcType=INTEGER},
+      </if>
+      <if test="spuCode != null" >
+        #{spuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="settlorCode != null" >
+        #{settlorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null" >
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null" >
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.SettleCertEntity" >
+    update t_ssc_settle_cert
+    <set >
+      <if test="batchId != null" >
+        BATCH_ID = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="relateOrderId != null" >
+        RELATE_ORDER_ID = #{relateOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="orderItemId != null" >
+        ORDER_ITEM_ID = #{orderItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="mdseName != null" >
+        MDSE_NAME = #{mdseName,jdbcType=VARCHAR},
+      </if>
+      <if test="settlorName != null" >
+        SETTLOR_NAME = #{settlorName,jdbcType=VARCHAR},
+      </if>
+      <if test="settlorType != null" >
+        SETTLOR_TYPE = #{settlorType,jdbcType=INTEGER},
+      </if>
+      <if test="settlePrice != null" >
+        SETTLE_PRICE = #{settlePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="cashPrice != null" >
+        CASH_PRICE = #{cashPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pointPrice != null" >
+        POINT_PRICE = #{pointPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null" >
+        ORDER_STATUS = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null" >
+        MEMBER_NAME = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        MEMBER_ID = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="custEmail != null" >
+        CUST_EMAIL = #{custEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null" >
+        MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="settleTime != null" >
+        SETTLE_TIME = #{settleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderType != null" >
+        ORDER_TYPE = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderVersion != null" >
+        ORDER_VERSION = #{orderVersion,jdbcType=INTEGER},
+      </if>
+      <if test="settlorId != null" >
+        SETTLOR_ID = #{settlorId,jdbcType=VARCHAR},
+      </if>
+      <if test="settleLaunchTime != null" >
+        SETTLE_LAUNCH_TIME = #{settleLaunchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commissionPrice != null" >
+        COMMISSION_PRICE = #{commissionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="contractPrice != null" >
+        CONTRACT_PRICE = #{contractPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="msg != null" >
+        MSG = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="processTime != null" >
+        PROCESS_TIME = #{processTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prmtName != null" >
+        PRMT_NAME = #{prmtName,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        BIZ_TYPE = #{bizType,jdbcType=INTEGER},
+      </if>
+      <if test="spuCode != null" >
+        SPU_CODE = #{spuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="settlorCode != null" >
+        SETTLOR_CODE = #{settlorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null" >
+        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null" >
+        SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        QUANTITY = #{quantity,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.SettleCertEntity" >
+    update t_ssc_settle_cert
+    set BATCH_ID = #{batchId,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=BIGINT},
+      RELATE_ORDER_ID = #{relateOrderId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      ORDER_ITEM_ID = #{orderItemId,jdbcType=VARCHAR},
+      MDSE_NAME = #{mdseName,jdbcType=VARCHAR},
+      SETTLOR_NAME = #{settlorName,jdbcType=VARCHAR},
+      SETTLOR_TYPE = #{settlorType,jdbcType=INTEGER},
+      SETTLE_PRICE = #{settlePrice,jdbcType=DECIMAL},
+      CASH_PRICE = #{cashPrice,jdbcType=DECIMAL},
+      POINT_PRICE = #{pointPrice,jdbcType=DECIMAL},
+      ORDER_STATUS = #{orderStatus,jdbcType=INTEGER},
+      MEMBER_NAME = #{memberName,jdbcType=VARCHAR},
+      MEMBER_ID = #{memberId,jdbcType=BIGINT},
+      CUST_EMAIL = #{custEmail,jdbcType=VARCHAR},
+      MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      SETTLE_TIME = #{settleTime,jdbcType=TIMESTAMP},
+      ORDER_TYPE = #{orderType,jdbcType=INTEGER},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      ORDER_VERSION = #{orderVersion,jdbcType=INTEGER},
+      SETTLOR_ID = #{settlorId,jdbcType=VARCHAR},
+      SETTLE_LAUNCH_TIME = #{settleLaunchTime,jdbcType=TIMESTAMP},
+      COMMISSION_PRICE = #{commissionPrice,jdbcType=DECIMAL},
+      CONTRACT_PRICE = #{contractPrice,jdbcType=DECIMAL},
+      MSG = #{msg,jdbcType=VARCHAR},
+      PROCESS_TIME = #{processTime,jdbcType=TIMESTAMP},
+      PRMT_NAME = #{prmtName,jdbcType=VARCHAR},
+      BIZ_TYPE = #{bizType,jdbcType=INTEGER},
+      SPU_CODE = #{spuCode,jdbcType=VARCHAR},
+      SETTLOR_CODE = #{settlorCode,jdbcType=VARCHAR},
+      ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      QUANTITY = #{quantity,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

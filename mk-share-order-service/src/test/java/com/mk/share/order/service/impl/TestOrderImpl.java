@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.mk.share.order.api.service.IOrderService;
 import com.mk.share.order.api.vo.OrderVO;
 import com.mk.share.order.service.base.BaseTestConfig;
-import com.mk.share.order.service.dao.OrderMapper;
-import com.mk.share.order.service.entity.Order;
+import com.mk.share.order.service.dao.OrderEntityMapper;
+import com.mk.share.order.service.entity.OrderEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
@@ -15,13 +15,13 @@ import org.testng.annotations.Test;
  */
 public class TestOrderImpl extends BaseTestConfig {
     @Autowired
-    private OrderMapper orderMapper;
+    private OrderEntityMapper orderMapper;
     @Autowired
     private IOrderService orderService;
 
     @Test
     public void test(){
-        Order order = orderMapper.selectByPrimaryKey(1L);
+        OrderEntity order = orderMapper.selectByPrimaryKey(1L);
         System.out.println(JSON.toJSONString(order));
     }
 

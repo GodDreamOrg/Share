@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mk.share.order.service.dao.ReturnGoodsItemEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.ReturnGoodsItemEntity" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="RETURN_GOODS_ID" property="returnGoodsId" jdbcType="BIGINT" />
+    <result column="SPU_CODE" property="spuCode" jdbcType="VARCHAR" />
+    <result column="SKU_CODE" property="skuCode" jdbcType="VARCHAR" />
+    <result column="MDSE_NAME" property="mdseName" jdbcType="VARCHAR" />
+    <result column="QUANTITY" property="quantity" jdbcType="INTEGER" />
+    <result column="RETURN_CASH" property="returnCash" jdbcType="DECIMAL" />
+    <result column="RETURN_POINT" property="returnPoint" jdbcType="DECIMAL" />
+    <result column="AUDIT_STATUS" property="auditStatus" jdbcType="INTEGER" />
+    <result column="PRODUCT_SOURCE" property="productSource" jdbcType="INTEGER" />
+    <result column="ORDER_ITEM_CODE" property="orderItemCode" jdbcType="VARCHAR" />
+    <result column="CASH_PRICE" property="cashPrice" jdbcType="DECIMAL" />
+    <result column="POINT_PRICE" property="pointPrice" jdbcType="DECIMAL" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="BIGINT" />
+    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, RETURN_GOODS_ID, SPU_CODE, SKU_CODE, MDSE_NAME, QUANTITY, RETURN_CASH, RETURN_POINT, 
+    AUDIT_STATUS, PRODUCT_SOURCE, ORDER_ITEM_CODE, CASH_PRICE, POINT_PRICE, UPDATE_BY, 
+    CREATE_BY, UPDATE_TIME, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ssc_return_goods_item
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_ssc_return_goods_item
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mk.share.order.service.entity.ReturnGoodsItemEntity" >
+    insert into t_ssc_return_goods_item (ID, RETURN_GOODS_ID, SPU_CODE, 
+      SKU_CODE, MDSE_NAME, QUANTITY, 
+      RETURN_CASH, RETURN_POINT, AUDIT_STATUS, 
+      PRODUCT_SOURCE, ORDER_ITEM_CODE, CASH_PRICE, 
+      POINT_PRICE, UPDATE_BY, CREATE_BY, 
+      UPDATE_TIME, CREATE_TIME)
+    values (#{id,jdbcType=BIGINT}, #{returnGoodsId,jdbcType=BIGINT}, #{spuCode,jdbcType=VARCHAR}, 
+      #{skuCode,jdbcType=VARCHAR}, #{mdseName,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{returnCash,jdbcType=DECIMAL}, #{returnPoint,jdbcType=DECIMAL}, #{auditStatus,jdbcType=INTEGER}, 
+      #{productSource,jdbcType=INTEGER}, #{orderItemCode,jdbcType=VARCHAR}, #{cashPrice,jdbcType=DECIMAL}, 
+      #{pointPrice,jdbcType=DECIMAL}, #{updateBy,jdbcType=BIGINT}, #{createBy,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.ReturnGoodsItemEntity" >
+    insert into t_ssc_return_goods_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="returnGoodsId != null" >
+        RETURN_GOODS_ID,
+      </if>
+      <if test="spuCode != null" >
+        SPU_CODE,
+      </if>
+      <if test="skuCode != null" >
+        SKU_CODE,
+      </if>
+      <if test="mdseName != null" >
+        MDSE_NAME,
+      </if>
+      <if test="quantity != null" >
+        QUANTITY,
+      </if>
+      <if test="returnCash != null" >
+        RETURN_CASH,
+      </if>
+      <if test="returnPoint != null" >
+        RETURN_POINT,
+      </if>
+      <if test="auditStatus != null" >
+        AUDIT_STATUS,
+      </if>
+      <if test="productSource != null" >
+        PRODUCT_SOURCE,
+      </if>
+      <if test="orderItemCode != null" >
+        ORDER_ITEM_CODE,
+      </if>
+      <if test="cashPrice != null" >
+        CASH_PRICE,
+      </if>
+      <if test="pointPrice != null" >
+        POINT_PRICE,
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="returnGoodsId != null" >
+        #{returnGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="spuCode != null" >
+        #{spuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null" >
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mdseName != null" >
+        #{mdseName,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="returnCash != null" >
+        #{returnCash,jdbcType=DECIMAL},
+      </if>
+      <if test="returnPoint != null" >
+        #{returnPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="productSource != null" >
+        #{productSource,jdbcType=INTEGER},
+      </if>
+      <if test="orderItemCode != null" >
+        #{orderItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cashPrice != null" >
+        #{cashPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pointPrice != null" >
+        #{pointPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.ReturnGoodsItemEntity" >
+    update t_ssc_return_goods_item
+    <set >
+      <if test="returnGoodsId != null" >
+        RETURN_GOODS_ID = #{returnGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="spuCode != null" >
+        SPU_CODE = #{spuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null" >
+        SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mdseName != null" >
+        MDSE_NAME = #{mdseName,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        QUANTITY = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="returnCash != null" >
+        RETURN_CASH = #{returnCash,jdbcType=DECIMAL},
+      </if>
+      <if test="returnPoint != null" >
+        RETURN_POINT = #{returnPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="auditStatus != null" >
+        AUDIT_STATUS = #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="productSource != null" >
+        PRODUCT_SOURCE = #{productSource,jdbcType=INTEGER},
+      </if>
+      <if test="orderItemCode != null" >
+        ORDER_ITEM_CODE = #{orderItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cashPrice != null" >
+        CASH_PRICE = #{cashPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pointPrice != null" >
+        POINT_PRICE = #{pointPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.ReturnGoodsItemEntity" >
+    update t_ssc_return_goods_item
+    set RETURN_GOODS_ID = #{returnGoodsId,jdbcType=BIGINT},
+      SPU_CODE = #{spuCode,jdbcType=VARCHAR},
+      SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      MDSE_NAME = #{mdseName,jdbcType=VARCHAR},
+      QUANTITY = #{quantity,jdbcType=INTEGER},
+      RETURN_CASH = #{returnCash,jdbcType=DECIMAL},
+      RETURN_POINT = #{returnPoint,jdbcType=DECIMAL},
+      AUDIT_STATUS = #{auditStatus,jdbcType=INTEGER},
+      PRODUCT_SOURCE = #{productSource,jdbcType=INTEGER},
+      ORDER_ITEM_CODE = #{orderItemCode,jdbcType=VARCHAR},
+      CASH_PRICE = #{cashPrice,jdbcType=DECIMAL},
+      POINT_PRICE = #{pointPrice,jdbcType=DECIMAL},
+      UPDATE_BY = #{updateBy,jdbcType=BIGINT},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

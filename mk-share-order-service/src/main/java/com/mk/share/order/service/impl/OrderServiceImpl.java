@@ -2,14 +2,12 @@ package com.mk.share.order.service.impl;
 
 import com.mk.share.order.api.service.IOrderService;
 import com.mk.share.order.api.vo.OrderVO;
-import com.mk.share.order.service.dao.OrderMapper;
-import com.mk.share.order.service.entity.Order;
+import com.mk.share.order.service.dao.OrderEntityMapper;
+import com.mk.share.order.service.entity.OrderEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 订单服务实现类
@@ -20,12 +18,12 @@ import java.util.List;
 @Service("orderService")
 public class OrderServiceImpl implements IOrderService {
     @Autowired
-    private OrderMapper orderMapper;
+    private OrderEntityMapper orderMapper;
 
     @Override
     public OrderVO selectByPrimaryKey(Long id) {
         OrderVO result = new OrderVO();
-        Order order = orderMapper.selectByPrimaryKey(id);
+        OrderEntity order = orderMapper.selectByPrimaryKey(id);
         BeanUtils.copyProperties(order, result);
         return result;
     }
