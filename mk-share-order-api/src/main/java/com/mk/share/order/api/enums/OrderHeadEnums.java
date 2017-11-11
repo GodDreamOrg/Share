@@ -1,25 +1,19 @@
 package com.mk.share.order.api.enums;
 
 /**
- * 订单枚举类
+ * 主订单枚举集合
  *
- * @author MonkeyKing
- * @create 2017-08-01 18:03
+ * @author wanghao
+ * @create 2017-11-11 16:59
  */
-public class OrderEnums {
+public class OrderHeadEnums {
     public enum Status {
-        TO_SEND(1,"待发货"),
-        TO_DISTRIBUTION(2,"待配送"),
-        TO_TAKE_OVER(3,"待收货"),
-        END(4,"已完成");
-
+        TO_PAYMENT(1,"待支付"),
+        TO_SPLIT(2,"待拆单"),
+        SPLIT_END(3,"已拆单")
+        ;
         private Integer code;
         private String value;
-
-        Status(Integer code, String value) {
-            this.code = code;
-            this.value = value;
-        }
 
         public Integer getCode() {
             return code;
@@ -27,6 +21,11 @@ public class OrderEnums {
 
         public String getValue() {
             return value;
+        }
+
+        Status(Integer code, String value) {
+            this.code = code;
+            this.value = value;
         }
 
         public Status getByCode(Integer code){
