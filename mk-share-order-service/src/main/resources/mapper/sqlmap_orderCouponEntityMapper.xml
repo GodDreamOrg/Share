@@ -1,41 +1,272 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mk.share.order.service.dao.OrderCouponEntityMapper" >
-  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.OrderCouponEntity" >
-    <id column="ID" property="id" jdbcType="BIGINT" />
-    <result column="ORDER_CODE" property="orderCode" jdbcType="VARCHAR" />
-    <result column="ORDER_ITEM_CODE" property="orderItemCode" jdbcType="VARCHAR" />
-    <result column="SKU_CODE" property="skuCode" jdbcType="VARCHAR" />
-    <result column="COUPON_CODE" property="couponCode" jdbcType="VARCHAR" />
-    <result column="COUPON_STATUS" property="couponStatus" jdbcType="INTEGER" />
-    <result column="SERVICE_CODE" property="serviceCode" jdbcType="VARCHAR" />
-    <result column="SERVICE_NAME" property="serviceName" jdbcType="VARCHAR" />
-    <result column="START_VALID_TIME" property="startValidTime" jdbcType="TIMESTAMP" />
-    <result column="END_VALID_TIME" property="endValidTime" jdbcType="TIMESTAMP" />
-    <result column="SOURCE" property="source" jdbcType="INTEGER" />
-    <result column="COUPON_TYPE" property="couponType" jdbcType="INTEGER" />
-    <result column="SETTLE_STATUS" property="settleStatus" jdbcType="INTEGER" />
-    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
-    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="UPDATE_BY" property="updateBy" jdbcType="BIGINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.share.order.service.dao.OrderCouponEntityMapper">
+  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.OrderCouponEntity">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode" />
+    <result column="ORDER_ITEM_CODE" jdbcType="VARCHAR" property="orderItemCode" />
+    <result column="SKU_CODE" jdbcType="VARCHAR" property="skuCode" />
+    <result column="COUPON_CODE" jdbcType="VARCHAR" property="couponCode" />
+    <result column="COUPON_STATUS" jdbcType="INTEGER" property="couponStatus" />
+    <result column="SERVICE_CODE" jdbcType="VARCHAR" property="serviceCode" />
+    <result column="SERVICE_NAME" jdbcType="VARCHAR" property="serviceName" />
+    <result column="START_VALID_TIME" jdbcType="TIMESTAMP" property="startValidTime" />
+    <result column="END_VALID_TIME" jdbcType="TIMESTAMP" property="endValidTime" />
+    <result column="SOURCE" jdbcType="INTEGER" property="source" />
+    <result column="COUPON_TYPE" jdbcType="INTEGER" property="couponType" />
+    <result column="SETTLE_STATUS" jdbcType="INTEGER" property="settleStatus" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_BY" jdbcType="BIGINT" property="createBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_BY" jdbcType="BIGINT" property="updateBy" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     ID, ORDER_CODE, ORDER_ITEM_CODE, SKU_CODE, COUPON_CODE, COUPON_STATUS, SERVICE_CODE, 
     SERVICE_NAME, START_VALID_TIME, END_VALID_TIME, SOURCE, COUPON_TYPE, SETTLE_STATUS, 
     CREATE_TIME, CREATE_BY, UPDATE_TIME, UPDATE_BY
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_coupon
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_order_coupon
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mk.share.order.service.entity.OrderCouponEntity">
+    insert into t_order_coupon (ID, ORDER_CODE, ORDER_ITEM_CODE, 
+      SKU_CODE, COUPON_CODE, COUPON_STATUS, 
+      SERVICE_CODE, SERVICE_NAME, START_VALID_TIME, 
+      END_VALID_TIME, SOURCE, COUPON_TYPE, 
+      SETTLE_STATUS, CREATE_TIME, CREATE_BY, 
+      UPDATE_TIME, UPDATE_BY)
+    values (#{id,jdbcType=BIGINT}, #{orderCode,jdbcType=VARCHAR}, #{orderItemCode,jdbcType=VARCHAR}, 
+      #{skuCode,jdbcType=VARCHAR}, #{couponCode,jdbcType=VARCHAR}, #{couponStatus,jdbcType=INTEGER}, 
+      #{serviceCode,jdbcType=VARCHAR}, #{serviceName,jdbcType=VARCHAR}, #{startValidTime,jdbcType=TIMESTAMP}, 
+      #{endValidTime,jdbcType=TIMESTAMP}, #{source,jdbcType=INTEGER}, #{couponType,jdbcType=INTEGER}, 
+      #{settleStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.OrderCouponEntity">
+    insert into t_order_coupon
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="orderCode != null">
+        ORDER_CODE,
+      </if>
+      <if test="orderItemCode != null">
+        ORDER_ITEM_CODE,
+      </if>
+      <if test="skuCode != null">
+        SKU_CODE,
+      </if>
+      <if test="couponCode != null">
+        COUPON_CODE,
+      </if>
+      <if test="couponStatus != null">
+        COUPON_STATUS,
+      </if>
+      <if test="serviceCode != null">
+        SERVICE_CODE,
+      </if>
+      <if test="serviceName != null">
+        SERVICE_NAME,
+      </if>
+      <if test="startValidTime != null">
+        START_VALID_TIME,
+      </if>
+      <if test="endValidTime != null">
+        END_VALID_TIME,
+      </if>
+      <if test="source != null">
+        SOURCE,
+      </if>
+      <if test="couponType != null">
+        COUPON_TYPE,
+      </if>
+      <if test="settleStatus != null">
+        SETTLE_STATUS,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderItemCode != null">
+        #{orderItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="couponCode != null">
+        #{couponCode,jdbcType=VARCHAR},
+      </if>
+      <if test="couponStatus != null">
+        #{couponStatus,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCode != null">
+        #{serviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null">
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="startValidTime != null">
+        #{startValidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endValidTime != null">
+        #{endValidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="couponType != null">
+        #{couponType,jdbcType=INTEGER},
+      </if>
+      <if test="settleStatus != null">
+        #{settleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.OrderCouponEntity">
+    update t_order_coupon
+    <set>
+      <if test="orderCode != null">
+        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderItemCode != null">
+        ORDER_ITEM_CODE = #{orderItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null">
+        SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="couponCode != null">
+        COUPON_CODE = #{couponCode,jdbcType=VARCHAR},
+      </if>
+      <if test="couponStatus != null">
+        COUPON_STATUS = #{couponStatus,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCode != null">
+        SERVICE_CODE = #{serviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null">
+        SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="startValidTime != null">
+        START_VALID_TIME = #{startValidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endValidTime != null">
+        END_VALID_TIME = #{endValidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="source != null">
+        SOURCE = #{source,jdbcType=INTEGER},
+      </if>
+      <if test="couponType != null">
+        COUPON_TYPE = #{couponType,jdbcType=INTEGER},
+      </if>
+      <if test="settleStatus != null">
+        SETTLE_STATUS = #{settleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.OrderCouponEntity">
+    update t_order_coupon
+    set ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      ORDER_ITEM_CODE = #{orderItemCode,jdbcType=VARCHAR},
+      SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      COUPON_CODE = #{couponCode,jdbcType=VARCHAR},
+      COUPON_STATUS = #{couponStatus,jdbcType=INTEGER},
+      SERVICE_CODE = #{serviceCode,jdbcType=VARCHAR},
+      SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
+      START_VALID_TIME = #{startValidTime,jdbcType=TIMESTAMP},
+      END_VALID_TIME = #{endValidTime,jdbcType=TIMESTAMP},
+      SOURCE = #{source,jdbcType=INTEGER},
+      COUPON_TYPE = #{couponType,jdbcType=INTEGER},
+      SETTLE_STATUS = #{settleStatus,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.OrderCouponEntity">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode" />
+    <result column="ORDER_ITEM_CODE" jdbcType="VARCHAR" property="orderItemCode" />
+    <result column="SKU_CODE" jdbcType="VARCHAR" property="skuCode" />
+    <result column="COUPON_CODE" jdbcType="VARCHAR" property="couponCode" />
+    <result column="COUPON_STATUS" jdbcType="INTEGER" property="couponStatus" />
+    <result column="SERVICE_CODE" jdbcType="VARCHAR" property="serviceCode" />
+    <result column="SERVICE_NAME" jdbcType="VARCHAR" property="serviceName" />
+    <result column="START_VALID_TIME" jdbcType="TIMESTAMP" property="startValidTime" />
+    <result column="END_VALID_TIME" jdbcType="TIMESTAMP" property="endValidTime" />
+    <result column="SOURCE" jdbcType="INTEGER" property="source" />
+    <result column="COUPON_TYPE" jdbcType="INTEGER" property="couponType" />
+    <result column="SETTLE_STATUS" jdbcType="INTEGER" property="settleStatus" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_BY" jdbcType="BIGINT" property="createBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_BY" jdbcType="BIGINT" property="updateBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ORDER_CODE, ORDER_ITEM_CODE, SKU_CODE, COUPON_CODE, COUPON_STATUS, SERVICE_CODE, 
+    SERVICE_NAME, START_VALID_TIME, END_VALID_TIME, SOURCE, COUPON_TYPE, SETTLE_STATUS, 
+    CREATE_TIME, CREATE_BY, UPDATE_TIME, UPDATE_BY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_ssc_order_coupon
     where ID = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_ssc_order_coupon
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.mk.share.order.service.entity.OrderCouponEntity" >
+  <insert id="insert" parameterType="com.mk.share.order.service.entity.OrderCouponEntity">
     insert into t_ssc_order_coupon (ID, ORDER_CODE, ORDER_ITEM_CODE, 
       SKU_CODE, COUPON_CODE, COUPON_STATUS, 
       SERVICE_CODE, SERVICE_NAME, START_VALID_TIME, 
@@ -49,170 +280,170 @@
       #{settleStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.OrderCouponEntity" >
+  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.OrderCouponEntity">
     insert into t_ssc_order_coupon
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         ID,
       </if>
-      <if test="orderCode != null" >
+      <if test="orderCode != null">
         ORDER_CODE,
       </if>
-      <if test="orderItemCode != null" >
+      <if test="orderItemCode != null">
         ORDER_ITEM_CODE,
       </if>
-      <if test="skuCode != null" >
+      <if test="skuCode != null">
         SKU_CODE,
       </if>
-      <if test="couponCode != null" >
+      <if test="couponCode != null">
         COUPON_CODE,
       </if>
-      <if test="couponStatus != null" >
+      <if test="couponStatus != null">
         COUPON_STATUS,
       </if>
-      <if test="serviceCode != null" >
+      <if test="serviceCode != null">
         SERVICE_CODE,
       </if>
-      <if test="serviceName != null" >
+      <if test="serviceName != null">
         SERVICE_NAME,
       </if>
-      <if test="startValidTime != null" >
+      <if test="startValidTime != null">
         START_VALID_TIME,
       </if>
-      <if test="endValidTime != null" >
+      <if test="endValidTime != null">
         END_VALID_TIME,
       </if>
-      <if test="source != null" >
+      <if test="source != null">
         SOURCE,
       </if>
-      <if test="couponType != null" >
+      <if test="couponType != null">
         COUPON_TYPE,
       </if>
-      <if test="settleStatus != null" >
+      <if test="settleStatus != null">
         SETTLE_STATUS,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         CREATE_TIME,
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         CREATE_BY,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         UPDATE_TIME,
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         UPDATE_BY,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="orderCode != null" >
+      <if test="orderCode != null">
         #{orderCode,jdbcType=VARCHAR},
       </if>
-      <if test="orderItemCode != null" >
+      <if test="orderItemCode != null">
         #{orderItemCode,jdbcType=VARCHAR},
       </if>
-      <if test="skuCode != null" >
+      <if test="skuCode != null">
         #{skuCode,jdbcType=VARCHAR},
       </if>
-      <if test="couponCode != null" >
+      <if test="couponCode != null">
         #{couponCode,jdbcType=VARCHAR},
       </if>
-      <if test="couponStatus != null" >
+      <if test="couponStatus != null">
         #{couponStatus,jdbcType=INTEGER},
       </if>
-      <if test="serviceCode != null" >
+      <if test="serviceCode != null">
         #{serviceCode,jdbcType=VARCHAR},
       </if>
-      <if test="serviceName != null" >
+      <if test="serviceName != null">
         #{serviceName,jdbcType=VARCHAR},
       </if>
-      <if test="startValidTime != null" >
+      <if test="startValidTime != null">
         #{startValidTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endValidTime != null" >
+      <if test="endValidTime != null">
         #{endValidTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="source != null" >
+      <if test="source != null">
         #{source,jdbcType=INTEGER},
       </if>
-      <if test="couponType != null" >
+      <if test="couponType != null">
         #{couponType,jdbcType=INTEGER},
       </if>
-      <if test="settleStatus != null" >
+      <if test="settleStatus != null">
         #{settleStatus,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         #{createBy,jdbcType=BIGINT},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         #{updateBy,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.OrderCouponEntity" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.OrderCouponEntity">
     update t_ssc_order_coupon
-    <set >
-      <if test="orderCode != null" >
+    <set>
+      <if test="orderCode != null">
         ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
       </if>
-      <if test="orderItemCode != null" >
+      <if test="orderItemCode != null">
         ORDER_ITEM_CODE = #{orderItemCode,jdbcType=VARCHAR},
       </if>
-      <if test="skuCode != null" >
+      <if test="skuCode != null">
         SKU_CODE = #{skuCode,jdbcType=VARCHAR},
       </if>
-      <if test="couponCode != null" >
+      <if test="couponCode != null">
         COUPON_CODE = #{couponCode,jdbcType=VARCHAR},
       </if>
-      <if test="couponStatus != null" >
+      <if test="couponStatus != null">
         COUPON_STATUS = #{couponStatus,jdbcType=INTEGER},
       </if>
-      <if test="serviceCode != null" >
+      <if test="serviceCode != null">
         SERVICE_CODE = #{serviceCode,jdbcType=VARCHAR},
       </if>
-      <if test="serviceName != null" >
+      <if test="serviceName != null">
         SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
       </if>
-      <if test="startValidTime != null" >
+      <if test="startValidTime != null">
         START_VALID_TIME = #{startValidTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endValidTime != null" >
+      <if test="endValidTime != null">
         END_VALID_TIME = #{endValidTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="source != null" >
+      <if test="source != null">
         SOURCE = #{source,jdbcType=INTEGER},
       </if>
-      <if test="couponType != null" >
+      <if test="couponType != null">
         COUPON_TYPE = #{couponType,jdbcType=INTEGER},
       </if>
-      <if test="settleStatus != null" >
+      <if test="settleStatus != null">
         SETTLE_STATUS = #{settleStatus,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         CREATE_BY = #{createBy,jdbcType=BIGINT},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         UPDATE_BY = #{updateBy,jdbcType=BIGINT},
       </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.OrderCouponEntity" >
+  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.OrderCouponEntity">
     update t_ssc_order_coupon
     set ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
       ORDER_ITEM_CODE = #{orderItemCode,jdbcType=VARCHAR},

@@ -1,46 +1,326 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mk.share.order.service.dao.OrderItemEntityMapper" >
-  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.OrderItemEntity" >
-    <id column="ID" property="id" jdbcType="BIGINT" />
-    <result column="ORDER_CODE" property="orderCode" jdbcType="VARCHAR" />
-    <result column="ORDER_HEAD_CODE" property="orderHeadCode" jdbcType="VARCHAR" />
-    <result column="ORDER_ITEM_CODE" property="orderItemCode" jdbcType="VARCHAR" />
-    <result column="SKU_CODE" property="skuCode" jdbcType="VARCHAR" />
-    <result column="SPU_CODE" property="spuCode" jdbcType="VARCHAR" />
-    <result column="CATELOG_CODE" property="catelogCode" jdbcType="VARCHAR" />
-    <result column="MDSE_NAME" property="mdseName" jdbcType="VARCHAR" />
-    <result column="BRAND_CODE" property="brandCode" jdbcType="VARCHAR" />
-    <result column="BRAND_NAME" property="brandName" jdbcType="VARCHAR" />
-    <result column="CASH_PRICE" property="cashPrice" jdbcType="DECIMAL" />
-    <result column="REAL_PRICE" property="realPrice" jdbcType="DECIMAL" />
-    <result column="POINT_PRICE" property="pointPrice" jdbcType="DECIMAL" />
-    <result column="TOTAL_CASH_PRICE" property="totalCashPrice" jdbcType="DECIMAL" />
-    <result column="TOTAL_REAL_PRICE" property="totalRealPrice" jdbcType="DECIMAL" />
-    <result column="TOTAL_POINT_PRICE" property="totalPointPrice" jdbcType="DECIMAL" />
-    <result column="QUANTITY" property="quantity" jdbcType="INTEGER" />
-    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
-    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="UPDATE_BY" property="updateBy" jdbcType="BIGINT" />
-    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.share.order.service.dao.OrderItemEntityMapper">
+  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.OrderItemEntity">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode" />
+    <result column="ORDER_HEAD_CODE" jdbcType="VARCHAR" property="orderHeadCode" />
+    <result column="ORDER_ITEM_CODE" jdbcType="VARCHAR" property="orderItemCode" />
+    <result column="SKU_CODE" jdbcType="VARCHAR" property="skuCode" />
+    <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode" />
+    <result column="CATELOG_CODE" jdbcType="VARCHAR" property="catelogCode" />
+    <result column="MDSE_NAME" jdbcType="VARCHAR" property="mdseName" />
+    <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode" />
+    <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName" />
+    <result column="CASH_PRICE" jdbcType="DECIMAL" property="cashPrice" />
+    <result column="REAL_PRICE" jdbcType="DECIMAL" property="realPrice" />
+    <result column="POINT_PRICE" jdbcType="DECIMAL" property="pointPrice" />
+    <result column="TOTAL_CASH_PRICE" jdbcType="DECIMAL" property="totalCashPrice" />
+    <result column="TOTAL_REAL_PRICE" jdbcType="DECIMAL" property="totalRealPrice" />
+    <result column="TOTAL_POINT_PRICE" jdbcType="DECIMAL" property="totalPointPrice" />
+    <result column="QUANTITY" jdbcType="INTEGER" property="quantity" />
+    <result column="CREATE_BY" jdbcType="BIGINT" property="createBy" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_BY" jdbcType="BIGINT" property="updateBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     ID, ORDER_CODE, ORDER_HEAD_CODE, ORDER_ITEM_CODE, SKU_CODE, SPU_CODE, CATELOG_CODE, 
     MDSE_NAME, BRAND_CODE, BRAND_NAME, CASH_PRICE, REAL_PRICE, POINT_PRICE, TOTAL_CASH_PRICE, 
     TOTAL_REAL_PRICE, TOTAL_POINT_PRICE, QUANTITY, CREATE_BY, CREATE_TIME, UPDATE_BY, 
     UPDATE_TIME
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_item
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_order_item
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mk.share.order.service.entity.OrderItemEntity">
+    insert into t_order_item (ID, ORDER_CODE, ORDER_HEAD_CODE, 
+      ORDER_ITEM_CODE, SKU_CODE, SPU_CODE, 
+      CATELOG_CODE, MDSE_NAME, BRAND_CODE, 
+      BRAND_NAME, CASH_PRICE, REAL_PRICE, 
+      POINT_PRICE, TOTAL_CASH_PRICE, TOTAL_REAL_PRICE, 
+      TOTAL_POINT_PRICE, QUANTITY, CREATE_BY, 
+      CREATE_TIME, UPDATE_BY, UPDATE_TIME
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderCode,jdbcType=VARCHAR}, #{orderHeadCode,jdbcType=VARCHAR}, 
+      #{orderItemCode,jdbcType=VARCHAR}, #{skuCode,jdbcType=VARCHAR}, #{spuCode,jdbcType=VARCHAR}, 
+      #{catelogCode,jdbcType=VARCHAR}, #{mdseName,jdbcType=VARCHAR}, #{brandCode,jdbcType=VARCHAR}, 
+      #{brandName,jdbcType=VARCHAR}, #{cashPrice,jdbcType=DECIMAL}, #{realPrice,jdbcType=DECIMAL}, 
+      #{pointPrice,jdbcType=DECIMAL}, #{totalCashPrice,jdbcType=DECIMAL}, #{totalRealPrice,jdbcType=DECIMAL}, 
+      #{totalPointPrice,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}, #{createBy,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.OrderItemEntity">
+    insert into t_order_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="orderCode != null">
+        ORDER_CODE,
+      </if>
+      <if test="orderHeadCode != null">
+        ORDER_HEAD_CODE,
+      </if>
+      <if test="orderItemCode != null">
+        ORDER_ITEM_CODE,
+      </if>
+      <if test="skuCode != null">
+        SKU_CODE,
+      </if>
+      <if test="spuCode != null">
+        SPU_CODE,
+      </if>
+      <if test="catelogCode != null">
+        CATELOG_CODE,
+      </if>
+      <if test="mdseName != null">
+        MDSE_NAME,
+      </if>
+      <if test="brandCode != null">
+        BRAND_CODE,
+      </if>
+      <if test="brandName != null">
+        BRAND_NAME,
+      </if>
+      <if test="cashPrice != null">
+        CASH_PRICE,
+      </if>
+      <if test="realPrice != null">
+        REAL_PRICE,
+      </if>
+      <if test="pointPrice != null">
+        POINT_PRICE,
+      </if>
+      <if test="totalCashPrice != null">
+        TOTAL_CASH_PRICE,
+      </if>
+      <if test="totalRealPrice != null">
+        TOTAL_REAL_PRICE,
+      </if>
+      <if test="totalPointPrice != null">
+        TOTAL_POINT_PRICE,
+      </if>
+      <if test="quantity != null">
+        QUANTITY,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderHeadCode != null">
+        #{orderHeadCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderItemCode != null">
+        #{orderItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="spuCode != null">
+        #{spuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="catelogCode != null">
+        #{catelogCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mdseName != null">
+        #{mdseName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null">
+        #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="cashPrice != null">
+        #{cashPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="realPrice != null">
+        #{realPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pointPrice != null">
+        #{pointPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalCashPrice != null">
+        #{totalCashPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRealPrice != null">
+        #{totalRealPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPointPrice != null">
+        #{totalPointPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.OrderItemEntity">
+    update t_order_item
+    <set>
+      <if test="orderCode != null">
+        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderHeadCode != null">
+        ORDER_HEAD_CODE = #{orderHeadCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderItemCode != null">
+        ORDER_ITEM_CODE = #{orderItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null">
+        SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="spuCode != null">
+        SPU_CODE = #{spuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="catelogCode != null">
+        CATELOG_CODE = #{catelogCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mdseName != null">
+        MDSE_NAME = #{mdseName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null">
+        BRAND_CODE = #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="cashPrice != null">
+        CASH_PRICE = #{cashPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="realPrice != null">
+        REAL_PRICE = #{realPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pointPrice != null">
+        POINT_PRICE = #{pointPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalCashPrice != null">
+        TOTAL_CASH_PRICE = #{totalCashPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRealPrice != null">
+        TOTAL_REAL_PRICE = #{totalRealPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPointPrice != null">
+        TOTAL_POINT_PRICE = #{totalPointPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null">
+        QUANTITY = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.OrderItemEntity">
+    update t_order_item
+    set ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      ORDER_HEAD_CODE = #{orderHeadCode,jdbcType=VARCHAR},
+      ORDER_ITEM_CODE = #{orderItemCode,jdbcType=VARCHAR},
+      SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      SPU_CODE = #{spuCode,jdbcType=VARCHAR},
+      CATELOG_CODE = #{catelogCode,jdbcType=VARCHAR},
+      MDSE_NAME = #{mdseName,jdbcType=VARCHAR},
+      BRAND_CODE = #{brandCode,jdbcType=VARCHAR},
+      BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      CASH_PRICE = #{cashPrice,jdbcType=DECIMAL},
+      REAL_PRICE = #{realPrice,jdbcType=DECIMAL},
+      POINT_PRICE = #{pointPrice,jdbcType=DECIMAL},
+      TOTAL_CASH_PRICE = #{totalCashPrice,jdbcType=DECIMAL},
+      TOTAL_REAL_PRICE = #{totalRealPrice,jdbcType=DECIMAL},
+      TOTAL_POINT_PRICE = #{totalPointPrice,jdbcType=DECIMAL},
+      QUANTITY = #{quantity,jdbcType=INTEGER},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=BIGINT},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.OrderItemEntity">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode" />
+    <result column="ORDER_HEAD_CODE" jdbcType="VARCHAR" property="orderHeadCode" />
+    <result column="ORDER_ITEM_CODE" jdbcType="VARCHAR" property="orderItemCode" />
+    <result column="SKU_CODE" jdbcType="VARCHAR" property="skuCode" />
+    <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode" />
+    <result column="CATELOG_CODE" jdbcType="VARCHAR" property="catelogCode" />
+    <result column="MDSE_NAME" jdbcType="VARCHAR" property="mdseName" />
+    <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode" />
+    <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName" />
+    <result column="CASH_PRICE" jdbcType="DECIMAL" property="cashPrice" />
+    <result column="REAL_PRICE" jdbcType="DECIMAL" property="realPrice" />
+    <result column="POINT_PRICE" jdbcType="DECIMAL" property="pointPrice" />
+    <result column="TOTAL_CASH_PRICE" jdbcType="DECIMAL" property="totalCashPrice" />
+    <result column="TOTAL_REAL_PRICE" jdbcType="DECIMAL" property="totalRealPrice" />
+    <result column="TOTAL_POINT_PRICE" jdbcType="DECIMAL" property="totalPointPrice" />
+    <result column="QUANTITY" jdbcType="INTEGER" property="quantity" />
+    <result column="CREATE_BY" jdbcType="BIGINT" property="createBy" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_BY" jdbcType="BIGINT" property="updateBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ORDER_CODE, ORDER_HEAD_CODE, ORDER_ITEM_CODE, SKU_CODE, SPU_CODE, CATELOG_CODE, 
+    MDSE_NAME, BRAND_CODE, BRAND_NAME, CASH_PRICE, REAL_PRICE, POINT_PRICE, TOTAL_CASH_PRICE, 
+    TOTAL_REAL_PRICE, TOTAL_POINT_PRICE, QUANTITY, CREATE_BY, CREATE_TIME, UPDATE_BY, 
+    UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_ssc_order_item
     where ID = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_ssc_order_item
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.mk.share.order.service.entity.OrderItemEntity" >
+  <insert id="insert" parameterType="com.mk.share.order.service.entity.OrderItemEntity">
     insert into t_ssc_order_item (ID, ORDER_CODE, ORDER_HEAD_CODE, 
       ORDER_ITEM_CODE, SKU_CODE, SPU_CODE, 
       CATELOG_CODE, MDSE_NAME, BRAND_CODE, 
@@ -58,206 +338,206 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.OrderItemEntity" >
+  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.OrderItemEntity">
     insert into t_ssc_order_item
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         ID,
       </if>
-      <if test="orderCode != null" >
+      <if test="orderCode != null">
         ORDER_CODE,
       </if>
-      <if test="orderHeadCode != null" >
+      <if test="orderHeadCode != null">
         ORDER_HEAD_CODE,
       </if>
-      <if test="orderItemCode != null" >
+      <if test="orderItemCode != null">
         ORDER_ITEM_CODE,
       </if>
-      <if test="skuCode != null" >
+      <if test="skuCode != null">
         SKU_CODE,
       </if>
-      <if test="spuCode != null" >
+      <if test="spuCode != null">
         SPU_CODE,
       </if>
-      <if test="catelogCode != null" >
+      <if test="catelogCode != null">
         CATELOG_CODE,
       </if>
-      <if test="mdseName != null" >
+      <if test="mdseName != null">
         MDSE_NAME,
       </if>
-      <if test="brandCode != null" >
+      <if test="brandCode != null">
         BRAND_CODE,
       </if>
-      <if test="brandName != null" >
+      <if test="brandName != null">
         BRAND_NAME,
       </if>
-      <if test="cashPrice != null" >
+      <if test="cashPrice != null">
         CASH_PRICE,
       </if>
-      <if test="realPrice != null" >
+      <if test="realPrice != null">
         REAL_PRICE,
       </if>
-      <if test="pointPrice != null" >
+      <if test="pointPrice != null">
         POINT_PRICE,
       </if>
-      <if test="totalCashPrice != null" >
+      <if test="totalCashPrice != null">
         TOTAL_CASH_PRICE,
       </if>
-      <if test="totalRealPrice != null" >
+      <if test="totalRealPrice != null">
         TOTAL_REAL_PRICE,
       </if>
-      <if test="totalPointPrice != null" >
+      <if test="totalPointPrice != null">
         TOTAL_POINT_PRICE,
       </if>
-      <if test="quantity != null" >
+      <if test="quantity != null">
         QUANTITY,
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         CREATE_BY,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         CREATE_TIME,
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         UPDATE_BY,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         UPDATE_TIME,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="orderCode != null" >
+      <if test="orderCode != null">
         #{orderCode,jdbcType=VARCHAR},
       </if>
-      <if test="orderHeadCode != null" >
+      <if test="orderHeadCode != null">
         #{orderHeadCode,jdbcType=VARCHAR},
       </if>
-      <if test="orderItemCode != null" >
+      <if test="orderItemCode != null">
         #{orderItemCode,jdbcType=VARCHAR},
       </if>
-      <if test="skuCode != null" >
+      <if test="skuCode != null">
         #{skuCode,jdbcType=VARCHAR},
       </if>
-      <if test="spuCode != null" >
+      <if test="spuCode != null">
         #{spuCode,jdbcType=VARCHAR},
       </if>
-      <if test="catelogCode != null" >
+      <if test="catelogCode != null">
         #{catelogCode,jdbcType=VARCHAR},
       </if>
-      <if test="mdseName != null" >
+      <if test="mdseName != null">
         #{mdseName,jdbcType=VARCHAR},
       </if>
-      <if test="brandCode != null" >
+      <if test="brandCode != null">
         #{brandCode,jdbcType=VARCHAR},
       </if>
-      <if test="brandName != null" >
+      <if test="brandName != null">
         #{brandName,jdbcType=VARCHAR},
       </if>
-      <if test="cashPrice != null" >
+      <if test="cashPrice != null">
         #{cashPrice,jdbcType=DECIMAL},
       </if>
-      <if test="realPrice != null" >
+      <if test="realPrice != null">
         #{realPrice,jdbcType=DECIMAL},
       </if>
-      <if test="pointPrice != null" >
+      <if test="pointPrice != null">
         #{pointPrice,jdbcType=DECIMAL},
       </if>
-      <if test="totalCashPrice != null" >
+      <if test="totalCashPrice != null">
         #{totalCashPrice,jdbcType=DECIMAL},
       </if>
-      <if test="totalRealPrice != null" >
+      <if test="totalRealPrice != null">
         #{totalRealPrice,jdbcType=DECIMAL},
       </if>
-      <if test="totalPointPrice != null" >
+      <if test="totalPointPrice != null">
         #{totalPointPrice,jdbcType=DECIMAL},
       </if>
-      <if test="quantity != null" >
+      <if test="quantity != null">
         #{quantity,jdbcType=INTEGER},
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         #{createBy,jdbcType=BIGINT},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         #{updateBy,jdbcType=BIGINT},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.OrderItemEntity" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.OrderItemEntity">
     update t_ssc_order_item
-    <set >
-      <if test="orderCode != null" >
+    <set>
+      <if test="orderCode != null">
         ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
       </if>
-      <if test="orderHeadCode != null" >
+      <if test="orderHeadCode != null">
         ORDER_HEAD_CODE = #{orderHeadCode,jdbcType=VARCHAR},
       </if>
-      <if test="orderItemCode != null" >
+      <if test="orderItemCode != null">
         ORDER_ITEM_CODE = #{orderItemCode,jdbcType=VARCHAR},
       </if>
-      <if test="skuCode != null" >
+      <if test="skuCode != null">
         SKU_CODE = #{skuCode,jdbcType=VARCHAR},
       </if>
-      <if test="spuCode != null" >
+      <if test="spuCode != null">
         SPU_CODE = #{spuCode,jdbcType=VARCHAR},
       </if>
-      <if test="catelogCode != null" >
+      <if test="catelogCode != null">
         CATELOG_CODE = #{catelogCode,jdbcType=VARCHAR},
       </if>
-      <if test="mdseName != null" >
+      <if test="mdseName != null">
         MDSE_NAME = #{mdseName,jdbcType=VARCHAR},
       </if>
-      <if test="brandCode != null" >
+      <if test="brandCode != null">
         BRAND_CODE = #{brandCode,jdbcType=VARCHAR},
       </if>
-      <if test="brandName != null" >
+      <if test="brandName != null">
         BRAND_NAME = #{brandName,jdbcType=VARCHAR},
       </if>
-      <if test="cashPrice != null" >
+      <if test="cashPrice != null">
         CASH_PRICE = #{cashPrice,jdbcType=DECIMAL},
       </if>
-      <if test="realPrice != null" >
+      <if test="realPrice != null">
         REAL_PRICE = #{realPrice,jdbcType=DECIMAL},
       </if>
-      <if test="pointPrice != null" >
+      <if test="pointPrice != null">
         POINT_PRICE = #{pointPrice,jdbcType=DECIMAL},
       </if>
-      <if test="totalCashPrice != null" >
+      <if test="totalCashPrice != null">
         TOTAL_CASH_PRICE = #{totalCashPrice,jdbcType=DECIMAL},
       </if>
-      <if test="totalRealPrice != null" >
+      <if test="totalRealPrice != null">
         TOTAL_REAL_PRICE = #{totalRealPrice,jdbcType=DECIMAL},
       </if>
-      <if test="totalPointPrice != null" >
+      <if test="totalPointPrice != null">
         TOTAL_POINT_PRICE = #{totalPointPrice,jdbcType=DECIMAL},
       </if>
-      <if test="quantity != null" >
+      <if test="quantity != null">
         QUANTITY = #{quantity,jdbcType=INTEGER},
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         CREATE_BY = #{createBy,jdbcType=BIGINT},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         UPDATE_BY = #{updateBy,jdbcType=BIGINT},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.OrderItemEntity" >
+  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.OrderItemEntity">
     update t_ssc_order_item
     set ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
       ORDER_HEAD_CODE = #{orderHeadCode,jdbcType=VARCHAR},

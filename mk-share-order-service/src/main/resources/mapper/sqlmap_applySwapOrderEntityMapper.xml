@@ -1,35 +1,208 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mk.share.order.service.dao.ApplySwapOrderEntityMapper" >
-  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.ApplySwapOrderEntity" >
-    <id column="ID" property="id" jdbcType="BIGINT" />
-    <result column="ORDER_CODE" property="orderCode" jdbcType="VARCHAR" />
-    <result column="APPLY_BY" property="applyBy" jdbcType="BIGINT" />
-    <result column="SKU_CODE" property="skuCode" jdbcType="VARCHAR" />
-    <result column="QUANTITY" property="quantity" jdbcType="INTEGER" />
-    <result column="APPLY_REASON" property="applyReason" jdbcType="VARCHAR" />
-    <result column="APPLY_TIME" property="applyTime" jdbcType="TIMESTAMP" />
-    <result column="PROCESS_TIME" property="processTime" jdbcType="TIMESTAMP" />
-    <result column="PROCESS_BY" property="processBy" jdbcType="BIGINT" />
-    <result column="PROCESS_APPLY_COMMENT" property="processApplyComment" jdbcType="VARCHAR" />
-    <result column="AUDIT_STATUS" property="auditStatus" jdbcType="INTEGER" />
-    <result column="OPER_STATUS" property="operStatus" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.share.order.service.dao.ApplySwapOrderEntityMapper">
+  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.ApplySwapOrderEntity">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode" />
+    <result column="APPLY_BY" jdbcType="BIGINT" property="applyBy" />
+    <result column="SKU_CODE" jdbcType="VARCHAR" property="skuCode" />
+    <result column="QUANTITY" jdbcType="INTEGER" property="quantity" />
+    <result column="APPLY_REASON" jdbcType="VARCHAR" property="applyReason" />
+    <result column="APPLY_TIME" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="PROCESS_TIME" jdbcType="TIMESTAMP" property="processTime" />
+    <result column="PROCESS_BY" jdbcType="BIGINT" property="processBy" />
+    <result column="PROCESS_APPLY_COMMENT" jdbcType="VARCHAR" property="processApplyComment" />
+    <result column="AUDIT_STATUS" jdbcType="INTEGER" property="auditStatus" />
+    <result column="OPER_STATUS" jdbcType="INTEGER" property="operStatus" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     ID, ORDER_CODE, APPLY_BY, SKU_CODE, QUANTITY, APPLY_REASON, APPLY_TIME, PROCESS_TIME, 
     PROCESS_BY, PROCESS_APPLY_COMMENT, AUDIT_STATUS, OPER_STATUS
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_apply_swap_order
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_apply_swap_order
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity">
+    insert into t_apply_swap_order (ID, ORDER_CODE, APPLY_BY, 
+      SKU_CODE, QUANTITY, APPLY_REASON, 
+      APPLY_TIME, PROCESS_TIME, PROCESS_BY, 
+      PROCESS_APPLY_COMMENT, AUDIT_STATUS, OPER_STATUS
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderCode,jdbcType=VARCHAR}, #{applyBy,jdbcType=BIGINT}, 
+      #{skuCode,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, #{applyReason,jdbcType=VARCHAR}, 
+      #{applyTime,jdbcType=TIMESTAMP}, #{processTime,jdbcType=TIMESTAMP}, #{processBy,jdbcType=BIGINT}, 
+      #{processApplyComment,jdbcType=VARCHAR}, #{auditStatus,jdbcType=INTEGER}, #{operStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity">
+    insert into t_apply_swap_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="orderCode != null">
+        ORDER_CODE,
+      </if>
+      <if test="applyBy != null">
+        APPLY_BY,
+      </if>
+      <if test="skuCode != null">
+        SKU_CODE,
+      </if>
+      <if test="quantity != null">
+        QUANTITY,
+      </if>
+      <if test="applyReason != null">
+        APPLY_REASON,
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME,
+      </if>
+      <if test="processTime != null">
+        PROCESS_TIME,
+      </if>
+      <if test="processBy != null">
+        PROCESS_BY,
+      </if>
+      <if test="processApplyComment != null">
+        PROCESS_APPLY_COMMENT,
+      </if>
+      <if test="auditStatus != null">
+        AUDIT_STATUS,
+      </if>
+      <if test="operStatus != null">
+        OPER_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="applyBy != null">
+        #{applyBy,jdbcType=BIGINT},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="applyReason != null">
+        #{applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processTime != null">
+        #{processTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processBy != null">
+        #{processBy,jdbcType=BIGINT},
+      </if>
+      <if test="processApplyComment != null">
+        #{processApplyComment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="operStatus != null">
+        #{operStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity">
+    update t_apply_swap_order
+    <set>
+      <if test="orderCode != null">
+        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="applyBy != null">
+        APPLY_BY = #{applyBy,jdbcType=BIGINT},
+      </if>
+      <if test="skuCode != null">
+        SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        QUANTITY = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="applyReason != null">
+        APPLY_REASON = #{applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processTime != null">
+        PROCESS_TIME = #{processTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processBy != null">
+        PROCESS_BY = #{processBy,jdbcType=BIGINT},
+      </if>
+      <if test="processApplyComment != null">
+        PROCESS_APPLY_COMMENT = #{processApplyComment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        AUDIT_STATUS = #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="operStatus != null">
+        OPER_STATUS = #{operStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity">
+    update t_apply_swap_order
+    set ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      APPLY_BY = #{applyBy,jdbcType=BIGINT},
+      SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      QUANTITY = #{quantity,jdbcType=INTEGER},
+      APPLY_REASON = #{applyReason,jdbcType=VARCHAR},
+      APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
+      PROCESS_TIME = #{processTime,jdbcType=TIMESTAMP},
+      PROCESS_BY = #{processBy,jdbcType=BIGINT},
+      PROCESS_APPLY_COMMENT = #{processApplyComment,jdbcType=VARCHAR},
+      AUDIT_STATUS = #{auditStatus,jdbcType=INTEGER},
+      OPER_STATUS = #{operStatus,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.ApplySwapOrderEntity">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode" />
+    <result column="APPLY_BY" jdbcType="BIGINT" property="applyBy" />
+    <result column="SKU_CODE" jdbcType="VARCHAR" property="skuCode" />
+    <result column="QUANTITY" jdbcType="INTEGER" property="quantity" />
+    <result column="APPLY_REASON" jdbcType="VARCHAR" property="applyReason" />
+    <result column="APPLY_TIME" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="PROCESS_TIME" jdbcType="TIMESTAMP" property="processTime" />
+    <result column="PROCESS_BY" jdbcType="BIGINT" property="processBy" />
+    <result column="PROCESS_APPLY_COMMENT" jdbcType="VARCHAR" property="processApplyComment" />
+    <result column="AUDIT_STATUS" jdbcType="INTEGER" property="auditStatus" />
+    <result column="OPER_STATUS" jdbcType="INTEGER" property="operStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ORDER_CODE, APPLY_BY, SKU_CODE, QUANTITY, APPLY_REASON, APPLY_TIME, PROCESS_TIME, 
+    PROCESS_BY, PROCESS_APPLY_COMMENT, AUDIT_STATUS, OPER_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_ssc_apply_swap_order
     where ID = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_ssc_apply_swap_order
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity" >
+  <insert id="insert" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity">
     insert into t_ssc_apply_swap_order (ID, ORDER_CODE, APPLY_BY, 
       SKU_CODE, QUANTITY, APPLY_REASON, 
       APPLY_TIME, PROCESS_TIME, PROCESS_BY, 
@@ -41,125 +214,125 @@
       #{processApplyComment,jdbcType=VARCHAR}, #{auditStatus,jdbcType=INTEGER}, #{operStatus,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity" >
+  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity">
     insert into t_ssc_apply_swap_order
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         ID,
       </if>
-      <if test="orderCode != null" >
+      <if test="orderCode != null">
         ORDER_CODE,
       </if>
-      <if test="applyBy != null" >
+      <if test="applyBy != null">
         APPLY_BY,
       </if>
-      <if test="skuCode != null" >
+      <if test="skuCode != null">
         SKU_CODE,
       </if>
-      <if test="quantity != null" >
+      <if test="quantity != null">
         QUANTITY,
       </if>
-      <if test="applyReason != null" >
+      <if test="applyReason != null">
         APPLY_REASON,
       </if>
-      <if test="applyTime != null" >
+      <if test="applyTime != null">
         APPLY_TIME,
       </if>
-      <if test="processTime != null" >
+      <if test="processTime != null">
         PROCESS_TIME,
       </if>
-      <if test="processBy != null" >
+      <if test="processBy != null">
         PROCESS_BY,
       </if>
-      <if test="processApplyComment != null" >
+      <if test="processApplyComment != null">
         PROCESS_APPLY_COMMENT,
       </if>
-      <if test="auditStatus != null" >
+      <if test="auditStatus != null">
         AUDIT_STATUS,
       </if>
-      <if test="operStatus != null" >
+      <if test="operStatus != null">
         OPER_STATUS,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="orderCode != null" >
+      <if test="orderCode != null">
         #{orderCode,jdbcType=VARCHAR},
       </if>
-      <if test="applyBy != null" >
+      <if test="applyBy != null">
         #{applyBy,jdbcType=BIGINT},
       </if>
-      <if test="skuCode != null" >
+      <if test="skuCode != null">
         #{skuCode,jdbcType=VARCHAR},
       </if>
-      <if test="quantity != null" >
+      <if test="quantity != null">
         #{quantity,jdbcType=INTEGER},
       </if>
-      <if test="applyReason != null" >
+      <if test="applyReason != null">
         #{applyReason,jdbcType=VARCHAR},
       </if>
-      <if test="applyTime != null" >
+      <if test="applyTime != null">
         #{applyTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="processTime != null" >
+      <if test="processTime != null">
         #{processTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="processBy != null" >
+      <if test="processBy != null">
         #{processBy,jdbcType=BIGINT},
       </if>
-      <if test="processApplyComment != null" >
+      <if test="processApplyComment != null">
         #{processApplyComment,jdbcType=VARCHAR},
       </if>
-      <if test="auditStatus != null" >
+      <if test="auditStatus != null">
         #{auditStatus,jdbcType=INTEGER},
       </if>
-      <if test="operStatus != null" >
+      <if test="operStatus != null">
         #{operStatus,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity">
     update t_ssc_apply_swap_order
-    <set >
-      <if test="orderCode != null" >
+    <set>
+      <if test="orderCode != null">
         ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
       </if>
-      <if test="applyBy != null" >
+      <if test="applyBy != null">
         APPLY_BY = #{applyBy,jdbcType=BIGINT},
       </if>
-      <if test="skuCode != null" >
+      <if test="skuCode != null">
         SKU_CODE = #{skuCode,jdbcType=VARCHAR},
       </if>
-      <if test="quantity != null" >
+      <if test="quantity != null">
         QUANTITY = #{quantity,jdbcType=INTEGER},
       </if>
-      <if test="applyReason != null" >
+      <if test="applyReason != null">
         APPLY_REASON = #{applyReason,jdbcType=VARCHAR},
       </if>
-      <if test="applyTime != null" >
+      <if test="applyTime != null">
         APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="processTime != null" >
+      <if test="processTime != null">
         PROCESS_TIME = #{processTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="processBy != null" >
+      <if test="processBy != null">
         PROCESS_BY = #{processBy,jdbcType=BIGINT},
       </if>
-      <if test="processApplyComment != null" >
+      <if test="processApplyComment != null">
         PROCESS_APPLY_COMMENT = #{processApplyComment,jdbcType=VARCHAR},
       </if>
-      <if test="auditStatus != null" >
+      <if test="auditStatus != null">
         AUDIT_STATUS = #{auditStatus,jdbcType=INTEGER},
       </if>
-      <if test="operStatus != null" >
+      <if test="operStatus != null">
         OPER_STATUS = #{operStatus,jdbcType=INTEGER},
       </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity" >
+  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.ApplySwapOrderEntity">
     update t_ssc_apply_swap_order
     set ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
       APPLY_BY = #{applyBy,jdbcType=BIGINT},

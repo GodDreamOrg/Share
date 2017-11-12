@@ -1,37 +1,222 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mk.share.order.service.dao.ReturnGoodsInfoEntityMapper" >
-  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.ReturnGoodsInfoEntity" >
-    <id column="ID" property="id" jdbcType="BIGINT" />
-    <result column="RETURN_GOODS_ITEM_ID" property="returnGoodsItemId" jdbcType="BIGINT" />
-    <result column="REFUND_TYPE" property="refundType" jdbcType="INTEGER" />
-    <result column="REFUND_POINT" property="refundPoint" jdbcType="DECIMAL" />
-    <result column="REFUND_CASH" property="refundCash" jdbcType="DECIMAL" />
-    <result column="REFUND_STATUS" property="refundStatus" jdbcType="INTEGER" />
-    <result column="REFUND_SERIAL_NUMBER" property="refundSerialNumber" jdbcType="BIGINT" />
-    <result column="COUPON_CODE" property="couponCode" jdbcType="VARCHAR" />
-    <result column="ORDER_HEAD_CODE" property="orderHeadCode" jdbcType="VARCHAR" />
-    <result column="UPDATE_BY" property="updateBy" jdbcType="BIGINT" />
-    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
-    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.share.order.service.dao.ReturnGoodsInfoEntityMapper">
+  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.ReturnGoodsInfoEntity">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="RETURN_GOODS_ITEM_ID" jdbcType="BIGINT" property="returnGoodsItemId" />
+    <result column="REFUND_TYPE" jdbcType="INTEGER" property="refundType" />
+    <result column="REFUND_POINT" jdbcType="DECIMAL" property="refundPoint" />
+    <result column="REFUND_CASH" jdbcType="DECIMAL" property="refundCash" />
+    <result column="REFUND_STATUS" jdbcType="INTEGER" property="refundStatus" />
+    <result column="REFUND_SERIAL_NUMBER" jdbcType="BIGINT" property="refundSerialNumber" />
+    <result column="COUPON_CODE" jdbcType="VARCHAR" property="couponCode" />
+    <result column="ORDER_HEAD_CODE" jdbcType="VARCHAR" property="orderHeadCode" />
+    <result column="UPDATE_BY" jdbcType="BIGINT" property="updateBy" />
+    <result column="CREATE_BY" jdbcType="BIGINT" property="createBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     ID, RETURN_GOODS_ITEM_ID, REFUND_TYPE, REFUND_POINT, REFUND_CASH, REFUND_STATUS, 
     REFUND_SERIAL_NUMBER, COUPON_CODE, ORDER_HEAD_CODE, UPDATE_BY, CREATE_BY, UPDATE_TIME, 
     CREATE_TIME
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_return_goods_info
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_return_goods_info
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity">
+    insert into t_return_goods_info (ID, RETURN_GOODS_ITEM_ID, REFUND_TYPE, 
+      REFUND_POINT, REFUND_CASH, REFUND_STATUS, 
+      REFUND_SERIAL_NUMBER, COUPON_CODE, ORDER_HEAD_CODE, 
+      UPDATE_BY, CREATE_BY, UPDATE_TIME, 
+      CREATE_TIME)
+    values (#{id,jdbcType=BIGINT}, #{returnGoodsItemId,jdbcType=BIGINT}, #{refundType,jdbcType=INTEGER}, 
+      #{refundPoint,jdbcType=DECIMAL}, #{refundCash,jdbcType=DECIMAL}, #{refundStatus,jdbcType=INTEGER}, 
+      #{refundSerialNumber,jdbcType=BIGINT}, #{couponCode,jdbcType=VARCHAR}, #{orderHeadCode,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=BIGINT}, #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity">
+    insert into t_return_goods_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="returnGoodsItemId != null">
+        RETURN_GOODS_ITEM_ID,
+      </if>
+      <if test="refundType != null">
+        REFUND_TYPE,
+      </if>
+      <if test="refundPoint != null">
+        REFUND_POINT,
+      </if>
+      <if test="refundCash != null">
+        REFUND_CASH,
+      </if>
+      <if test="refundStatus != null">
+        REFUND_STATUS,
+      </if>
+      <if test="refundSerialNumber != null">
+        REFUND_SERIAL_NUMBER,
+      </if>
+      <if test="couponCode != null">
+        COUPON_CODE,
+      </if>
+      <if test="orderHeadCode != null">
+        ORDER_HEAD_CODE,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="returnGoodsItemId != null">
+        #{returnGoodsItemId,jdbcType=BIGINT},
+      </if>
+      <if test="refundType != null">
+        #{refundType,jdbcType=INTEGER},
+      </if>
+      <if test="refundPoint != null">
+        #{refundPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="refundCash != null">
+        #{refundCash,jdbcType=DECIMAL},
+      </if>
+      <if test="refundStatus != null">
+        #{refundStatus,jdbcType=INTEGER},
+      </if>
+      <if test="refundSerialNumber != null">
+        #{refundSerialNumber,jdbcType=BIGINT},
+      </if>
+      <if test="couponCode != null">
+        #{couponCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderHeadCode != null">
+        #{orderHeadCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity">
+    update t_return_goods_info
+    <set>
+      <if test="returnGoodsItemId != null">
+        RETURN_GOODS_ITEM_ID = #{returnGoodsItemId,jdbcType=BIGINT},
+      </if>
+      <if test="refundType != null">
+        REFUND_TYPE = #{refundType,jdbcType=INTEGER},
+      </if>
+      <if test="refundPoint != null">
+        REFUND_POINT = #{refundPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="refundCash != null">
+        REFUND_CASH = #{refundCash,jdbcType=DECIMAL},
+      </if>
+      <if test="refundStatus != null">
+        REFUND_STATUS = #{refundStatus,jdbcType=INTEGER},
+      </if>
+      <if test="refundSerialNumber != null">
+        REFUND_SERIAL_NUMBER = #{refundSerialNumber,jdbcType=BIGINT},
+      </if>
+      <if test="couponCode != null">
+        COUPON_CODE = #{couponCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderHeadCode != null">
+        ORDER_HEAD_CODE = #{orderHeadCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity">
+    update t_return_goods_info
+    set RETURN_GOODS_ITEM_ID = #{returnGoodsItemId,jdbcType=BIGINT},
+      REFUND_TYPE = #{refundType,jdbcType=INTEGER},
+      REFUND_POINT = #{refundPoint,jdbcType=DECIMAL},
+      REFUND_CASH = #{refundCash,jdbcType=DECIMAL},
+      REFUND_STATUS = #{refundStatus,jdbcType=INTEGER},
+      REFUND_SERIAL_NUMBER = #{refundSerialNumber,jdbcType=BIGINT},
+      COUPON_CODE = #{couponCode,jdbcType=VARCHAR},
+      ORDER_HEAD_CODE = #{orderHeadCode,jdbcType=VARCHAR},
+      UPDATE_BY = #{updateBy,jdbcType=BIGINT},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.mk.share.order.service.entity.ReturnGoodsInfoEntity">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="RETURN_GOODS_ITEM_ID" jdbcType="BIGINT" property="returnGoodsItemId" />
+    <result column="REFUND_TYPE" jdbcType="INTEGER" property="refundType" />
+    <result column="REFUND_POINT" jdbcType="DECIMAL" property="refundPoint" />
+    <result column="REFUND_CASH" jdbcType="DECIMAL" property="refundCash" />
+    <result column="REFUND_STATUS" jdbcType="INTEGER" property="refundStatus" />
+    <result column="REFUND_SERIAL_NUMBER" jdbcType="BIGINT" property="refundSerialNumber" />
+    <result column="COUPON_CODE" jdbcType="VARCHAR" property="couponCode" />
+    <result column="ORDER_HEAD_CODE" jdbcType="VARCHAR" property="orderHeadCode" />
+    <result column="UPDATE_BY" jdbcType="BIGINT" property="updateBy" />
+    <result column="CREATE_BY" jdbcType="BIGINT" property="createBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, RETURN_GOODS_ITEM_ID, REFUND_TYPE, REFUND_POINT, REFUND_CASH, REFUND_STATUS, 
+    REFUND_SERIAL_NUMBER, COUPON_CODE, ORDER_HEAD_CODE, UPDATE_BY, CREATE_BY, UPDATE_TIME, 
+    CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_ssc_return_goods_info
     where ID = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_ssc_return_goods_info
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity" >
+  <insert id="insert" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity">
     insert into t_ssc_return_goods_info (ID, RETURN_GOODS_ITEM_ID, REFUND_TYPE, 
       REFUND_POINT, REFUND_CASH, REFUND_STATUS, 
       REFUND_SERIAL_NUMBER, COUPON_CODE, ORDER_HEAD_CODE, 
@@ -43,134 +228,134 @@
       #{updateBy,jdbcType=BIGINT}, #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity" >
+  <insert id="insertSelective" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity">
     insert into t_ssc_return_goods_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         ID,
       </if>
-      <if test="returnGoodsItemId != null" >
+      <if test="returnGoodsItemId != null">
         RETURN_GOODS_ITEM_ID,
       </if>
-      <if test="refundType != null" >
+      <if test="refundType != null">
         REFUND_TYPE,
       </if>
-      <if test="refundPoint != null" >
+      <if test="refundPoint != null">
         REFUND_POINT,
       </if>
-      <if test="refundCash != null" >
+      <if test="refundCash != null">
         REFUND_CASH,
       </if>
-      <if test="refundStatus != null" >
+      <if test="refundStatus != null">
         REFUND_STATUS,
       </if>
-      <if test="refundSerialNumber != null" >
+      <if test="refundSerialNumber != null">
         REFUND_SERIAL_NUMBER,
       </if>
-      <if test="couponCode != null" >
+      <if test="couponCode != null">
         COUPON_CODE,
       </if>
-      <if test="orderHeadCode != null" >
+      <if test="orderHeadCode != null">
         ORDER_HEAD_CODE,
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         UPDATE_BY,
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         CREATE_BY,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         UPDATE_TIME,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         CREATE_TIME,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="returnGoodsItemId != null" >
+      <if test="returnGoodsItemId != null">
         #{returnGoodsItemId,jdbcType=BIGINT},
       </if>
-      <if test="refundType != null" >
+      <if test="refundType != null">
         #{refundType,jdbcType=INTEGER},
       </if>
-      <if test="refundPoint != null" >
+      <if test="refundPoint != null">
         #{refundPoint,jdbcType=DECIMAL},
       </if>
-      <if test="refundCash != null" >
+      <if test="refundCash != null">
         #{refundCash,jdbcType=DECIMAL},
       </if>
-      <if test="refundStatus != null" >
+      <if test="refundStatus != null">
         #{refundStatus,jdbcType=INTEGER},
       </if>
-      <if test="refundSerialNumber != null" >
+      <if test="refundSerialNumber != null">
         #{refundSerialNumber,jdbcType=BIGINT},
       </if>
-      <if test="couponCode != null" >
+      <if test="couponCode != null">
         #{couponCode,jdbcType=VARCHAR},
       </if>
-      <if test="orderHeadCode != null" >
+      <if test="orderHeadCode != null">
         #{orderHeadCode,jdbcType=VARCHAR},
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         #{updateBy,jdbcType=BIGINT},
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         #{createBy,jdbcType=BIGINT},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity">
     update t_ssc_return_goods_info
-    <set >
-      <if test="returnGoodsItemId != null" >
+    <set>
+      <if test="returnGoodsItemId != null">
         RETURN_GOODS_ITEM_ID = #{returnGoodsItemId,jdbcType=BIGINT},
       </if>
-      <if test="refundType != null" >
+      <if test="refundType != null">
         REFUND_TYPE = #{refundType,jdbcType=INTEGER},
       </if>
-      <if test="refundPoint != null" >
+      <if test="refundPoint != null">
         REFUND_POINT = #{refundPoint,jdbcType=DECIMAL},
       </if>
-      <if test="refundCash != null" >
+      <if test="refundCash != null">
         REFUND_CASH = #{refundCash,jdbcType=DECIMAL},
       </if>
-      <if test="refundStatus != null" >
+      <if test="refundStatus != null">
         REFUND_STATUS = #{refundStatus,jdbcType=INTEGER},
       </if>
-      <if test="refundSerialNumber != null" >
+      <if test="refundSerialNumber != null">
         REFUND_SERIAL_NUMBER = #{refundSerialNumber,jdbcType=BIGINT},
       </if>
-      <if test="couponCode != null" >
+      <if test="couponCode != null">
         COUPON_CODE = #{couponCode,jdbcType=VARCHAR},
       </if>
-      <if test="orderHeadCode != null" >
+      <if test="orderHeadCode != null">
         ORDER_HEAD_CODE = #{orderHeadCode,jdbcType=VARCHAR},
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         UPDATE_BY = #{updateBy,jdbcType=BIGINT},
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         CREATE_BY = #{createBy,jdbcType=BIGINT},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity" >
+  <update id="updateByPrimaryKey" parameterType="com.mk.share.order.service.entity.ReturnGoodsInfoEntity">
     update t_ssc_return_goods_info
     set RETURN_GOODS_ITEM_ID = #{returnGoodsItemId,jdbcType=BIGINT},
       REFUND_TYPE = #{refundType,jdbcType=INTEGER},
