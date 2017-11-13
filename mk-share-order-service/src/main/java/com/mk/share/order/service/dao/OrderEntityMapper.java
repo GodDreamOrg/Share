@@ -14,4 +14,6 @@ public interface OrderEntityMapper {
     int updateByPrimaryKeySelective(OrderEntity record);
 
     int updateByPrimaryKey(OrderEntity record);
+
+    int updateStatusByOrderCode(OrderEntity orderEntity);
 }

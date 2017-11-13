@@ -1,5 +1,6 @@
 package com.mk.share.order.service.impl;
 
+import com.mk.share.order.api.enums.OrderEnums;
 import com.mk.share.order.api.service.IOrderService;
 import com.mk.share.order.api.vo.BuySKUVO;
 import com.mk.share.order.api.vo.OrderVO;
@@ -135,6 +136,18 @@ public class OrderServiceImpl implements IOrderService {
             e.printStackTrace();
         }
         return isOk;
+    }
+
+    @Override
+    public boolean syncDispatching(String orderCode) {
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setStatus(OrderEnums.Status.TO_DISTRIBUTION.getCode());
+        orderEntity.setOrderCode(orderCode);
+        int result = orderEntityMapper.updateStatusByOrderCode(orderEntity);
+        if (result == 1) {
+            return true;
+        }
+        return false;
     }
 
     private String getRandomSmsCode(int length) {
