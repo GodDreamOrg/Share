@@ -14,4 +14,6 @@ public interface IOrderService {
     OrderVO selectByPrimaryKey(Long id);
 
     boolean splitOrder(SplitOrderVO splitOrderVO);
+
+    boolean syncDispatching(String orderCode);
 }
